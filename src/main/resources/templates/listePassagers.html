@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>ALTN72 - TP Fil Rouge - Liste des passagers</title>
+</head>
+<body>
+
+<h1>ALTN72 - TP Fil Rouge - Liste des passagers</h1>
+
+<table class="table table-striped table-condensed" style="width: auto">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Pièce d'identité</th>
+            <th scope="col">Numéro d'identité</th>
+            <th scope="col">Numéro de réservation</th>
+            <th scope="col">Commentaires</th>
+            <th scope="col"><bold>Action</bold></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="passager :${passagers}">
+            <td th:text="${passager.id}"></td>
+            <td th:text="${passager.nom}"></td>
+            <td th:text="${passager.prenom}"></td>
+            <td th:text="${passager.pieceIdentite}"></td>
+            <td th:text="${passager.numeroIdentite}"></td>
+            <td th:text="${passager.numeroReservation}"></td>
+            <td th:text="${passager.commentaires}"></td>
+            <td>
+                <form th:action="@{/tpfilrouge/preparerModifPassager/{idPassager}(idPassager=${passager.id})}" method="post"  style="display:inline;">
+                    <button class="btn btn-info">Modifier</button>
+                    <!-- Champ caché pour contourner la contrainte GET/POST des formulaires HTML -->
+                    <input type="hidden" name="_method" value="PUT" />
+                </form>
+
+                <form th:action="@{/tpfilrouge/supprimerPassager/{idPassager}(idPassager=${passager.id})}" method="post"  style="display:inline;">
+                    <button class="btn btn-warning">Supprimer</button>
+                    <!-- Champ caché pour contourner la contrainte GET/POST des formulaires HTML -->
+                    <input type="hidden" name="_method" value="DELETE" />
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/tpfilrouge/preparerAjoutPassager}" class="btn btn-primary btn-sm mb-3" >Ajouter Nouveau Passager</a>
+
+</body>
+</html>

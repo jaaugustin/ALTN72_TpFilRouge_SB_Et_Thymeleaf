@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ALTN72 - TP Fil Rouge - Détails passager</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>ALTN72 - TP Fil Rouge - Détails Passager</h1>
+
+		<form th:action="@{/tpfilrouge/modifierPassager/{idPassager}(idPassager=${passagerToUpdate.id})}" th:object="${passagerToUpdate}" method="POST">
+			<!-- Champ caché pour contourner la contrainte GET/POST des formulaires HTML -->
+			<input type="hidden" name="_method" value="PUT" />
+
+			Nom : <input type="text" th:field="*{nom}" class="form-control mb-4 col-4">
+			Prénom :<input type="text" th:field="*{prenom}" class="form-control mb-4 col-4">
+			Pièce d'identité :<input type="text" th:field="*{pieceIdentite}"  class="form-control mb-4 col-4">
+			Numéro d'identité :<input type="text" th:field="*{numeroIdentite}"  class="form-control mb-4 col-4">
+			Numéro de réservation :<input type="text" th:field="*{numeroReservation}"  class="form-control mb-4 col-4">
+			Commentaires :<input type="text" th:field="*{commentaires}"  class="form-control mb-4 col-4">
+
+			<button type="submit" class="btn btn-primary col-2">Validez</button>
+
+		</form>
+
+		<hr>
+		<a th:href="@{/tpfilrouge/passagers}"> Afficher la liste de passagers</a>
+
+	</div>
+</body>
+</html>
